@@ -1,0 +1,19 @@
+language: generic 
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t maxim2andreev/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true maxim2andreev/react-test npm test
+
+after_success:
+  - docker build -t maxim2andreev/docker-study-complex-client ./client
+  - docker build -t maxim2andreev/docker-study-complex-server ./server
+  - docker build -t maxim2andreev/docker-study-complex-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_LOGIN" --password-stdin 
+  - docker push maxim2andreev/docker-study-complex-client
+  - docker push maxim2andreev/docker-study-complex-server
+  - docker push maxim2andreev/docker-study-complex-worker
