@@ -17,3 +17,15 @@ after_success:
   - docker push maxim2andreev/docker-study-complex-client
   - docker push maxim2andreev/docker-study-complex-server
   - docker push maxim2andreev/docker-study-complex-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-central-1"
+  app: "Multi-Container AWS"
+  env: "Multicontaineraws-env"
+  bucket_name: "elasticbeanstalk-eu-central-1-217003881490"
+  bucket_path: "Multi-Container AWS"
+  on:
+      branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
