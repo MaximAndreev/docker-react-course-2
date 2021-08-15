@@ -1,6 +1,6 @@
 {
     "AWSEBDockerrunVersion": 2,
-    "ContainerDefinitions": [
+    "containerDefinitions": [
         {
             "name": "Client",
             "image": "maxim2andreev/docker-study-complex-client",
