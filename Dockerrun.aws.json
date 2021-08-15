@@ -1,47 +1,41 @@
 {
     "AWSEBDockerrunVersion": 2,
-    "volumes": [
-        {
-          "name": "default",
-          "host": {
-            "sourcePath": "/Multi-Container AWS/volume"
-          }
-        }
-    ],
     "containerDefinitions": [
-        {
-            "name": "Client",
-            "image": "maxim2andreev/docker-study-complex-client",
-            "hostname": "client",
-            "essential": false,
-            "memory": 128
-        },
-        {
-            "name": "Api Server",
-            "image": "maxim2andreev/docker-study-complex-server",
-            "hostname": "api",
-            "essential": false,
-            "memory": 128
-        },
-        {
-            "name": "Worker",
-            "image": "maxim2andreev/docker-study-complex-worker",
-            "hostname": "worker",
-            "essential": false,
-            "memory": 128
-        },
-        {
-            "name": "nginx",
-            "image": "nginx:alpine",
-            "essential": true,
-            "memory": 128,
-            "portMappings": [
-                {
-                    "hostPort": 80,
-                    "containerPort": 80
-                }
-            ],
-            "links": ["Client", "Api Server"]
-        }
+      {
+        "name": "client",
+        "image": "maxim2andreev/docker-study-complex-client",
+        "hostname": "client",
+        "essential": false,
+        "memory": 128
+      },
+      {
+        "name": "server",
+        "image": "maxim2andreev/docker-study-complex-server",
+        "hostname": "api",
+        "essential": false,
+        "memory": 128
+      },
+      {
+        "name": "worker",
+        "image": "maxim2andreev/docker-study-complex-worker",
+        "hostname": "worker",
+        "essential": false,
+        "memory": 128
+      },
+      {
+        "name": "nginx",
+        "image": "maxim2andreev/docker-study-complex-nginx",
+        "hostname": "nginx",
+        "essential": true,
+        "portMappings": [
+          {
+            "hostPort": 80,
+            "containerPort": 80
+          }
+        ],
+        "links": ["client", "server"],
+        "memory": 128
+      }
     ]
-}
+  }
+  
