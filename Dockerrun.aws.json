@@ -1,5 +1,13 @@
 {
     "AWSEBDockerrunVersion": 2,
+    "volumes": [
+        {
+          "name": "default",
+          "host": {
+            "sourcePath": "/Multi-Container AWS/volume"
+          }
+        }
+    ],
     "containerDefinitions": [
         {
             "name": "Client",
